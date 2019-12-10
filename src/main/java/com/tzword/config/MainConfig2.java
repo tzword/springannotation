@@ -1,12 +1,13 @@
 package com.tzword.config;
 
 import com.tzword.bean.Person;
+import com.tzword.condition.LinuxCondition;
+import com.tzword.condition.WindowsCondition;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
+//类中组件统一设置。满足当前条件，这个类中配置的所有的bean注册才能生效
+@Conditional({WindowsCondition.class})
 @Configuration
 public class MainConfig2 {
 
@@ -31,5 +32,23 @@ public class MainConfig2 {
     public Person person(){
         System.out.println("给容器中添加Person....");
         return new Person("王五","25");
+    }
+
+    /**
+     * @Conditional({Conditional}):按照一定的条件进行判断，满足条件给容器注册bean
+     *
+     * 如果系统是windows,给容器中注册("bill")
+     * 如果是linux系统给容器中注册("linus")
+     */
+    @Conditional({WindowsCondition.class})
+    @Bean("bill")
+    public Person person01(){
+        return new Person("bill", "62");
+    }
+
+    @Conditional({LinuxCondition.class})
+    @Bean("linus")
+    public Person person02(){
+        return new Person("linus", "48");
     }
 }
