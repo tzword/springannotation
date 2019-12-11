@@ -1,5 +1,6 @@
 package com.tzword.test;
 
+import com.tzword.bean.Blue;
 import com.tzword.bean.Person;
 import com.tzword.config.MainConfig;
 import com.tzword.config.MainConfig2;
@@ -16,6 +17,8 @@ public class IocTest {
     @Test
     public void testImport(){
         printBeans(applicationContext);
+        Blue bean = applicationContext.getBean(Blue.class);
+        System.out.println("选择器："+ bean);
     }
 
     private void printBeans(AnnotationConfigApplicationContext applicationContext){

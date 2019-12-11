@@ -4,6 +4,7 @@ import com.tzword.bean.Color;
 import com.tzword.bean.Person;
 import com.tzword.bean.Red;
 import com.tzword.condition.LinuxCondition;
+import com.tzword.condition.MyImportSelector;
 import com.tzword.condition.WindowsCondition;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
@@ -12,7 +13,7 @@ import org.springframework.context.annotation.*;
 @Conditional({WindowsCondition.class})
 @Configuration
 //导入组件，id默认是组件的全类名
-@Import({Color.class, Red.class})
+@Import({Color.class, Red.class, MyImportSelector.class})
 public class MainConfig2 {
 
     //默认是单例的
@@ -62,5 +63,6 @@ public class MainConfig2 {
      * 2）、@Bean[导入的第三方包里面的组件]
      * 3）、@Import[快速给容器中导入一个组件]
      *      ① @Import(要导入到容器的组件)；容器中就会自动注册这个组件，id默认就是全类名
+     *      ② @ImportSelector：返回需要导入的组件的全类名数组
      */
 }
