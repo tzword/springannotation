@@ -1,6 +1,7 @@
 package com.tzword.config;
 
 import com.tzword.bean.Color;
+import com.tzword.bean.ColorFactoryBean;
 import com.tzword.bean.Person;
 import com.tzword.bean.Red;
 import com.tzword.condition.LinuxCondition;
@@ -66,5 +67,12 @@ public class MainConfig2 {
      *      ① @Import(要导入到容器的组件)；容器中就会自动注册这个组件，id默认就是全类名
      *      ② @ImportSelector：返回需要导入的组件的全类名数组
      *      ③ @ImportBeanDefinitionRegistrar：手动注册bean到容器中
+     * 4）、使用Spring提供的 FactoryBean（工厂Bean）
+     *      ① 默认获取到的是工厂bean调用getObject创建的对象
+     *      ② 要获取工厂Bean本身，我们需要给id前面加一个&（例如：&colorFactoryBean）
      */
+    @Bean
+    public ColorFactoryBean colorFactoryBean(){
+        return new ColorFactoryBean();
+    }
 }
