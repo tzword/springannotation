@@ -3,6 +3,7 @@ package com.tzword.config;
 
 import com.tzword.bean.Car;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
@@ -22,13 +23,15 @@ import org.springframework.context.annotation.Scope;
  *          多实例：容器不会管理这个bean；容器不会调用销毁方法；
  * 1）、指定初始化和销毁方法；
  *          通过@Bean指定init-method和destroy-method
- *
+ * 2）、通过让Bean实现InitializingBean（定义初始化逻辑）
+ *                      DisposableBean（定义销毁逻辑）
  *
  */
+@ComponentScan("com.tzword.bean")
 @Configuration
 public class MainConfigOfLifeCycle {
 
-    @Scope("prototype")
+    //@Scope("prototype")
     @Bean(initMethod = "init",destroyMethod = "destroy")
     public Car car(){
         return new Car();
