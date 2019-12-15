@@ -50,6 +50,9 @@ import org.springframework.context.annotation.Scope;
  *          postProcessBeforeInitialization；在初始化之前工作
  *          postProcessAfterInitialization；在初始化之后工作
  *
+ * Spring底层对BeanPostProcessor 的使用：
+ *          bean赋值，注入其他的组件，@Autowired，生命周期注解功能，@Async,XXX 都是因为 实现了 BeanPostProcessor
+ *
  */
 @ComponentScan("com.tzword.bean")
 @Configuration
