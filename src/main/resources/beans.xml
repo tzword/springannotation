@@ -6,7 +6,7 @@
 
     <!-- 包扫描，只要标注了@Controller、@Service、@Repository、@Component -->
     <!-- <context:component-scan base-package="com.tzword"></context:component-scan> -->
-
+        <!--<context:property-placeholder location="classpath:"/>-->
         <bean id ="person" class="com.tzword.bean.Person">
             <property name="age" value="18"></property>
             <property name="name" value="zhangsan"></property>
