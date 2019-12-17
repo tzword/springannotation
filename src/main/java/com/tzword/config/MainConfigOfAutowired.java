@@ -1,5 +1,7 @@
 package com.tzword.config;
 
+import com.tzword.bean.Car;
+import com.tzword.bean.Color;
 import com.tzword.dao.BookDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +14,7 @@ import java.awt.print.Book;
 /**
  * 自动装配
  *          spring利用依赖注入(DI),完成对IOC容器中的组件的依赖关系赋值，
-    1）、AutoWired 自动注入
+    1）、@AutoWired 自动注入
         1）、默认优先按照类型去容器中找对应的组件：applicationContext.getBean(BookDao.class);找到就赋值
         2）、如果找到多个相同类型的组件，再将属性的名称作为组件的id去容器中查找
                                         applicationContext.getBean("bookDao")
@@ -37,9 +39,14 @@ import java.awt.print.Book;
             @Autowired：Spring定义的（特有的）；
             @Resource、@Inject都是java规范
 
+    3）、@AutoWired ：构造器，参数，方法，属性,都是从容器中获取参数组件的值
+            1）、[标注在方法位置],@Bean+方法参数；参数从容器中获取；默认不写效果都是一样的，都能自动装配
+            2）、[标注在构造器上]，如果组件只有一个有参构造器，这个有参构造器参数的@Autowired可以省略，参数位置的组件还是可以自动的从容器中获取
+            3）、放在参数位置
+
  */
 @Configuration
-@ComponentScan({"com.tzword.service","com.tzword.dao","com.tzword.controller"})
+@ComponentScan({"com.tzword.service","com.tzword.dao","com.tzword.controller","com.tzword.bean"})
 public class MainConfigOfAutowired {
     @Primary
     @Bean("bookDao2")
@@ -47,6 +54,19 @@ public class MainConfigOfAutowired {
         BookDao bookDao = new BookDao();
         bookDao.setLable("2");
         return bookDao;
+    }
+
+
+    /**
+     * @bean标注的方法创建对象的时候，方法参数的值从容器中获取
+     * @param car
+     * @return
+     */
+    @Bean
+    public Color color(Car car){
+        Color color = new Color();
+        color.setCar(car);
+        return color;
     }
 
 }
