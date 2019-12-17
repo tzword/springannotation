@@ -25,6 +25,18 @@ import java.awt.print.Book;
             @Autowired
             BookDao bookDao;
         }
+
+    2）、Spring还支持@Resource(JSR250)和@Inject(JSR330)[java规范的注解]
+            @Resource:
+                可以和@Autowired一样实现自动装配功能；默认是按照组件名称进行装配的；
+                没有能支持@Primary功能没有支持@Autowired（required = false）;
+            @Inject:
+                需要导入javax.inject的包，和Autowired的功能一样。没有required=false的功能；
+
+    总结：
+            @Autowired：Spring定义的（特有的）；
+            @Resource、@Inject都是java规范
+
  */
 @Configuration
 @ComponentScan({"com.tzword.service","com.tzword.dao","com.tzword.controller"})
