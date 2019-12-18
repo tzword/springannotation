@@ -43,7 +43,11 @@ import java.awt.print.Book;
             1）、[标注在方法位置],@Bean+方法参数；参数从容器中获取；默认不写效果都是一样的，都能自动装配
             2）、[标注在构造器上]，如果组件只有一个有参构造器，这个有参构造器参数的@Autowired可以省略，参数位置的组件还是可以自动的从容器中获取
             3）、放在参数位置
-
+    4）、自定义组件想要使用Spring容器底层的一些组件（applicationContxt,BeanFactory,xxx）;
+            自定义组件实现xxxAware:在创建对象的时候，会调用接口规定的方法注入相关的组件；Aware
+            把Spring底层一些组件注入到自定义的Bean中
+            xxxAware：功能使用xxxProcessor；（每一个xxxAware都对应一个xxxProcessor）
+                ApplicationContextAware ==> ApplicationContextAwareProcessor
  */
 @Configuration
 @ComponentScan({"com.tzword.service","com.tzword.dao","com.tzword.controller","com.tzword.bean"})
